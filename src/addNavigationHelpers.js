@@ -28,7 +28,7 @@ export default function(navigation) {
       gobacked = true
       setTimeout(()=>{
         gobacked = false
-      },2000)
+      },1000)
 
       if (typeof navigateTo === 'string') {
         return navigation.dispatch(
