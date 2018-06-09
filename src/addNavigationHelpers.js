@@ -4,6 +4,9 @@ import NavigationActions from './NavigationActions';
 import invariant from './utils/invariant';
 
 export default function(navigation) {
+  //快速点击跳转bug
+  let gobacked = false
+
   return {
     ...navigation,
     goBack: key => {
@@ -20,6 +23,13 @@ export default function(navigation) {
       );
     },
     navigate: (navigateTo, params, action) => {
+
+      if (gobacked) return
+      gobacked = true
+      setTimeout(()=>{
+        gobacked = false
+      },2000)
+
       if (typeof navigateTo === 'string') {
         return navigation.dispatch(
           NavigationActions.navigate({ routeName: navigateTo, params, action })
